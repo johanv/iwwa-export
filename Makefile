@@ -32,7 +32,7 @@ import-dump: .stamps/import-dump
 	sleep 2
 	touch .stamps/start-db
 
-export/individuals.csv: .stamps/import-dump
+export/individuals.csv: .stamps/import-dump queries/individuals.sql
 	cat queries/individuals.sql | $(MYSQL) > export/individuals.csv
 
 clean:
