@@ -2,6 +2,13 @@
 
 MYSQL = mysql -u root -pblablablaroot -h 127.0.0.1 civi
 
+exports.tgz: export export/individuals.csv export/individuals-email.csv \
+	export/individuals-phone.csv export/individuals-address.csv
+	tar czvf exports.tgz export
+
+export/%.csv: queries/%.sql .stamps/import-dump 
+	cat $< | $(MYSQL) > $@
+
 dumps/freddy.dump.gz: dumps
 	ssh root@mijnvps "mysqldump civi | gzip" > dumps/freddy.dump.gz
 
@@ -31,9 +38,6 @@ import-dump: .stamps/import-dump
 	docker-compose up --force -d
 	sleep 2
 	touch .stamps/start-db
-
-export/individuals.csv: .stamps/import-dump queries/individuals.sql
-	cat queries/individuals.sql | $(MYSQL) > export/individuals.csv
 
 clean:
 	rm .stamps/*
