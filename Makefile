@@ -4,8 +4,11 @@ MYSQL = mysql -u root -pblablablaroot -h 127.0.0.1 civi
 
 exports.tgz: export export/individuals.csv export/individuals-email.csv \
 	export/individuals-phone.csv export/individuals-address.csv \
-	export/clubs.csv export/club-members.csv export/events.csv
+	export/clubs.csv export/club-members.csv export/events.csv \
+	export/participants.csv
 	tar czvf exports.tgz export
+
+# TODO: lidmaatschappen, sympathisanten, maillijsten, sympathisanten, cafés
 
 export/%.csv: queries/%.sql .stamps/import-dump 
 	cat $< | $(MYSQL) > $@
