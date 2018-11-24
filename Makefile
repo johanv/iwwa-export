@@ -3,7 +3,8 @@
 MYSQL = mysql -u root -pblablablaroot -h 127.0.0.1 civi
 
 exports.tgz: export export/individuals.csv export/individuals-email.csv \
-	export/individuals-phone.csv export/individuals-address.csv
+	export/individuals-phone.csv export/individuals-address.csv \
+	expoft/clubs.csv
 	tar czvf exports.tgz export
 
 export/%.csv: queries/%.sql .stamps/import-dump 
