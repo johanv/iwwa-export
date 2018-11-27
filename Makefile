@@ -12,10 +12,11 @@ upload: .stamps/upload
 exports.tgz: export export/individuals.csv export/individuals-email.csv \
 	export/individuals-phone.csv export/individuals-address.csv \
 	export/clubs.csv export/club-members.csv export/events.csv \
-	export/participants.csv
+	export/participants.csv export/pubs.csv export/pubs-email.csv \
+	export/pubs-phone.csv export/pubs-address.csv
 	tar czvf exports.tgz export
 
-# TODO: lidmaatschappen, sympathisanten, maillijsten, sympathisanten, cafés
+# TODO: lidmaatschappen, maillijsten, sympathisanten
 
 export/%.csv: queries/%.sql .stamps/import-dump 
 	cat $< | $(MYSQL) > $@
